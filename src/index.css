@@ -1,0 +1,378 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HerbReady — Global CSS  (Wise-Inspired Green Design System)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Custom properties ──────────────────────────────────────────────────── */
+:root {
+    /* Backgrounds */
+    --bg-window: #ffffff;
+    --bg-surface: #f5f7f3;
+    --bg-elevated: #e8ebe6;
+    --bg-input: #ffffff;
+    --bg-row-alt: #f9fbf7;
+
+    /* Borders */
+    --border-default: rgba(14, 15, 12, 0.12);
+    --border-focus: #9fe870;
+    --border-subtle: rgba(14, 15, 12, 0.07);
+
+    /* Accent */
+    --accent-primary: #9fe870;
+    --accent-primary-dim: #8dd960;
+    --accent-primary-dark: #163300;
+    --accent-amber: #ffd11a;
+    --accent-red: #d03238;
+
+    /* Text */
+    --text-primary: #0e0f0c;
+    --text-secondary: #454745;
+    --text-muted: #868685;
+    --text-red: #d03238;
+
+    /* Drug status colours */
+    --drug-green-bg: #e2f6d5;
+    --drug-green-border: #9fe870;
+    --drug-green-text: #163300;
+    --drug-white-bg: #f9fbf7;
+    --drug-white-border: rgba(14, 15, 12, 0.12);
+    --drug-white-text: #454745;
+    --drug-red-bg: #fde8e8;
+    --drug-red-border: #f0a0a0;
+    --drug-red-text: #d03238;
+
+    /* Status indicator colours */
+    --status-connected: #054d28;
+    --status-disconnected: #ffc091;
+    --status-error: #d03238;
+    --status-connecting: #ffd11a;
+
+    /* Badge */
+    --badge-bg: #e2f6d5;
+    --badge-text: #163300;
+
+    /* Typography */
+    --font-sans:
+        "Inter", -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+        sans-serif;
+    --font-thai: "Tahoma", "TH Sarabun New", "Sarabun", "Arial", sans-serif;
+    --font-mono: "Consolas", "Menlo", "Courier New", monospace;
+
+    /* Shadows */
+    --shadow-card: rgba(14, 15, 12, 0.12) 0px 0px 0px 1px;
+    --shadow-deep: rgba(14, 15, 12, 0.1) 0px 4px 24px;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#app {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-window);
+    color: var(--text-primary);
+    font-family: var(--font-sans), var(--font-thai);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    font-feature-settings: "calt";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #e8ebe6;
+}
+::-webkit-scrollbar-thumb {
+    background: #9fe870;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #8dd960;
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-sans), var(--font-thai);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    font-feature-settings: "calt";
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+a {
+    color: var(--accent-primary-dark);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* ── App layout ──────────────────────────────────────────────────────────── */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg-window);
+}
+
+/* ── Menu bar ────────────────────────────────────────────────────────────── */
+.menu-bar {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    background: var(--bg-window);
+    border-bottom: 1px solid var(--border-default);
+    padding: 0 12px;
+    gap: 2px;
+    flex-shrink: 0;
+    -webkit-app-region: drag;
+}
+
+.menu-bar__app-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+    padding-right: 10px;
+    margin-right: 4px;
+    -webkit-app-region: no-drag;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.menu-bar__spacer {
+    flex: 1;
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 9px;
+    border-radius: 9999px;
+    font-family: var(--font-sans), var(--font-thai);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition:
+        background 0.1s,
+        color 0.1s;
+    -webkit-app-region: no-drag;
+}
+.menu-btn:hover {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+/* ── Tab bar ──────────────────────────────────────────────────────────────── */
+.tab-bar {
+    display: flex;
+    gap: 0;
+    background: var(--bg-window);
+    border-bottom: 1px solid var(--border-default);
+    padding: 0 12px;
+    flex-shrink: 0;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    font-family: var(--font-sans), var(--font-thai);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition:
+        color 0.15s,
+        border-color 0.15s;
+    white-space: nowrap;
+    font-feature-settings: "calt";
+}
+.tab-btn:hover {
+    color: var(--text-secondary);
+}
+.tab-btn--active {
+    color: #163300;
+    border-bottom-color: #9fe870;
+    font-weight: 700;
+}
+
+/* ── Tab content ─────────────────────────────────────────────────────────── */
+.tab-content {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ── Shared button styles ────────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    border-radius: 9999px;
+    padding: 6px 14px;
+    font-family: var(--font-sans), var(--font-thai);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        opacity 0.15s,
+        transform 0.1s,
+        box-shadow 0.15s;
+    white-space: nowrap;
+    outline: none;
+    font-feature-settings: "calt";
+}
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(159, 232, 112, 0.4);
+}
+
+.btn--primary {
+    background: #9fe870;
+    color: #163300;
+}
+.btn--primary:not(:disabled):hover {
+    background: #cdffad;
+    transform: scale(1.05);
+}
+.btn--primary:not(:disabled):active {
+    transform: scale(0.95);
+}
+
+.btn--ghost {
+    background: rgba(14, 15, 12, 0.06);
+    border: none;
+    color: var(--text-primary);
+}
+.btn--ghost:not(:disabled):hover {
+    background: rgba(14, 15, 12, 0.1);
+    transform: scale(1.05);
+}
+.btn--ghost:not(:disabled):active {
+    transform: scale(0.95);
+}
+
+.btn--export {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    font-size: 12px;
+    padding: 4px 12px;
+}
+.btn--export:not(:disabled):hover {
+    background: #e2f6d5;
+    border-color: #9fe870;
+    color: #163300;
+    transform: scale(1.05);
+}
+.btn--export:not(:disabled):active {
+    transform: scale(0.95);
+}
+
+.btn--sm {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* ── Form inputs (global defaults) ──────────────────────────────────────── */
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="date"] {
+    font-family: var(--font-sans), var(--font-thai);
+    background: var(--bg-input);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    padding: 6px;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-feature-settings: "calt";
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="password"]::placeholder,
+input[type="date"]::placeholder {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus {
+    outline: none;
+    border-color: #9fe870;
+    box-shadow: 0 0 0 2px rgba(159, 232, 112, 0.25);
+}
+
+/* ── Pill badge ──────────────────────────────────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    background: #e2f6d5;
+    color: #163300;
+    border-radius: 9999px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    font-feature-settings: "calt";
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.card {
+    background: var(--bg-window);
+    border: 1px solid rgba(14, 15, 12, 0.12);
+    border-radius: 16px;
+    box-shadow: rgba(14, 15, 12, 0.12) 0px 0px 0px 1px;
+}
+
+/* ── Selection ───────────────────────────────────────────────────────────── */
+::selection {
+    background: rgba(159, 232, 112, 0.3);
+    color: var(--text-primary);
+}
