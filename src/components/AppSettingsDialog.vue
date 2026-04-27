@@ -38,11 +38,11 @@ const activePage = ref<Page>("drugs");
 const saving = ref(false);
 
 // Drug form
-const drugForm = reactive<DrugConfig>({
+const drugForm = reactive({
     icode: "",
     abbr: "",
-    course_days: 7,
-    capsules: 0,
+    course_days: null as number | null,
+    capsules: null as number | null,
     drug_name: "",
     enabled: true,
 });
@@ -113,6 +113,18 @@ function onIcodeInput() {
     }
 }
 
+function onCourseDaysInput(e: Event) {
+    const t = e.target as HTMLInputElement | null;
+    const v = t ? t.value : "";
+    drugForm.course_days = v === "" ? null : Number(v);
+}
+
+function onCapsulesInput(e: Event) {
+    const t = e.target as HTMLInputElement | null;
+    const v = t ? t.value : "";
+    drugForm.capsules = v === "" ? null : Number(v);
+}
+
 async function lookupDrugName() {
     if (!drugForm.icode.trim()) return;
     drugLookupLoading.value = true;
@@ -148,8 +160,9 @@ function addOrUpdateDrug() {
     const entry: DrugConfig = {
         icode: drugForm.icode.trim(),
         abbr: drugForm.abbr.trim(),
-        course_days: Number(drugForm.course_days) || 7,
-        capsules: Number(drugForm.capsules) || 0,
+        course_days:
+            drugForm.course_days == null ? 7 : Number(drugForm.course_days),
+        capsules: drugForm.capsules == null ? 0 : Number(drugForm.capsules),
         drug_name: drugForm.drug_name.trim(),
         enabled: drugForm.enabled !== false,
     };
@@ -183,8 +196,8 @@ function clearDrugForm() {
     Object.assign(drugForm, {
         icode: "",
         abbr: "",
-        course_days: 7,
-        capsules: 0,
+        course_days: null,
+        capsules: null,
         drug_name: "",
         enabled: true,
     });
@@ -695,7 +708,7 @@ async function save() {
                             }}
                         </h3>
                         <div class="form-row">
-                            <label class="form-label">iCode</label>
+                            <label class="form-label">icode</label>
                             <div class="icode-wrap">
                                 <input
                                     v-model="drugForm.icode"
@@ -726,7 +739,7 @@ async function save() {
                                 v-model="drugForm.drug_name"
                                 class="form-input form-input--readonly"
                                 type="text"
-                                placeholder="กดค้นหา iCode ก่อน"
+                                placeholder="กดค้นหา icode ก่อน"
                                 readonly
                             />
                         </div>
@@ -743,22 +756,34 @@ async function save() {
                         <div class="form-row">
                             <label class="form-label">วันที่จ่าย</label>
                             <input
-                                v-model.number="drugForm.course_days"
+                                :value="
+                                    drugForm.course_days == null
+                                        ? ''
+                                        : drugForm.course_days
+                                "
                                 class="form-input"
                                 type="number"
                                 min="1"
+                                placeholder="7"
                                 :disabled="!drugLookupDone"
+                                @input="onCourseDaysInput"
                             />
                             <span class="form-unit">วัน</span>
                         </div>
                         <div class="form-row">
                             <label class="form-label">จำนวน</label>
                             <input
-                                v-model.number="drugForm.capsules"
+                                :value="
+                                    drugForm.capsules == null
+                                        ? ''
+                                        : drugForm.capsules
+                                "
                                 class="form-input"
                                 type="number"
                                 min="0"
+                                placeholder="20"
                                 :disabled="!drugLookupDone"
+                                @input="onCapsulesInput"
                             />
                             <span class="form-unit">หน่วยนับ</span>
                         </div>
