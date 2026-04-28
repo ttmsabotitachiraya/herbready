@@ -103,6 +103,8 @@ async function save() {
             drugs: drugs.value,
             departments: depts.value,
             lab_rules: globalAppConfig.value.lab_rules ?? [],
+            herb_drug_interactions:
+                globalAppConfig.value.herb_drug_interactions ?? [],
         };
         await saveAppConfig(config);
         emit("saved", config);
